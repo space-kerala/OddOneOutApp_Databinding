@@ -26,7 +26,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserViewHolder> {
 
     @Override
     public UserViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        
+
         LayoutInflater inflater = LayoutInflater.from(c);
         View statusContainer = inflater.inflate(R.layout.user_item, parent, false);
         return new UserViewHolder(statusContainer);
@@ -41,12 +41,16 @@ public class UserAdapter extends RecyclerView.Adapter<UserViewHolder> {
             @Override
             public void onClick(View view) {
                 Toast.makeText(c, "hai", Toast.LENGTH_SHORT).show();
-                User usr1 = new User("ChintanRathod", 28, "https://openclipart.org/image/90px/svg_to_png/220150/Tiere-coloured.png");
-                User usr2 = new User("MaulikRathod", 25, "https://openclipart.org/image/90px/svg_to_png/232003/Winteraktiv-coloured.png");
+                User usr1 = new User("ChintanRathod", 28, "file:///android_asset/plant.png");
+                User usr2 = new User("MaulikRathod", 25, "file:///android_asset/apple.png");
+                User usr3 = new User("MaulikRathod", 25, "file:///android_asset/watermelon.png");
+                User usr4 = new User("MaulikRathod", 25, "file:///android_asset/grape.png");
 
                 users.clear();
                 users.add(usr1);
                 users.add(usr2);
+                users.add(usr3);
+                users.add(usr4);
                 UserAdapter.this.notifyDataSetChanged();
             }
         });
