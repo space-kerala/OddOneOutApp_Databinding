@@ -5,15 +5,15 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 
-import java.util.ArrayList;
-
 /**
  * Created by root on 10/10/17.
  */
 
 public class DataBindingListActivity extends AppCompatActivity  {
-    private RecyclerView list;
-    private UserAdapter adapter;
+    private RecyclerView recycler;
+    private ItemAdapter adapter;
+    private JsonHandler jsonHandler;
+
     private int coloumn;
 
     @Override
@@ -21,26 +21,36 @@ public class DataBindingListActivity extends AppCompatActivity  {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.binding_list_activity);
 
-        coloumn = 2;
 
-        list = (RecyclerView) findViewById(R.id.list);
-        list.setLayoutManager(new StaggeredGridLayoutManager(coloumn, 1));
+        coloumn = 2;
+        recycler = (RecyclerView) findViewById(R.id.recycler);
+        recycler.setLayoutManager(new StaggeredGridLayoutManager(coloumn, 1));
         //list.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
 
-        User user1 = new User("ChintanRathod", 28, "file:///android_asset/lion.png");
-        User user2 = new User("MaulikRathod", 25, "file:///android_asset/bear.png");
-        User user3 = new User("MaulikRathod", 25, "file:///android_asset/jaguar.png");
-        User user4 = new User("MaulikRathod", 25, "file:///android_asset/tux.png");
+        /*Item Item1 = new Item(false, "file:///android_asset/lion.png");
+        Item Item2 = new Item(false, "file:///android_asset/bear.png");
+        Item Item3 = new Item(false, "file:///android_asset/jaguar.png");
+        Item Item4 = new Item(true, "file:///android_asset/tux.png");
 
 
-        ArrayList<User> userList = new ArrayList<>();
-        userList.add(user1);
-        userList.add(user2);
-        userList.add(user3);
-        userList.add(user4);
+        ArrayList<Item> ItemList = new ArrayList<>();
+        ItemList.add(Item1);
+        ItemList.add(Item2);
+        ItemList.add(Item3);
+        ItemList.add(Item4);*/
 
-        adapter = new UserAdapter(userList, this);
-        list.setAdapter(adapter);
+        jsonHandler = new JsonHandler(this);
+
+        jsonHandler.readJson();
+
+
+        adapter = new ItemAdapter(jsonHandler.getSceneData(0), this);
+        recycler.setAdapter(adapter);
+
+
+
+
+
 
     }
 
