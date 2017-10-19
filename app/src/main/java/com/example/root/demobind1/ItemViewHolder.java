@@ -4,7 +4,7 @@ package com.example.root.demobind1;
 import android.databinding.DataBindingUtil;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.widget.Button;
+import android.widget.ImageButton;
 
 import com.example.root.demobind1.databinding.SceneItemBinding;
 
@@ -15,12 +15,13 @@ import com.example.root.demobind1.databinding.SceneItemBinding;
 
 public class ItemViewHolder extends RecyclerView.ViewHolder{
     private SceneItemBinding binding;
-    public Button button;
+    public ImageButton imageButton;
+
 
     public ItemViewHolder(View layoutView) {
         super(layoutView);
         binding = DataBindingUtil.bind(layoutView);
-        button = (Button)layoutView.findViewById(R.id.button_id);
+        imageButton= (ImageButton)layoutView.findViewById(R.id.imagebutton);
 
     }
 

@@ -19,18 +19,17 @@
 
 
             <ImageButton
-                android:id="@+id/circleView"
+                android:id="@+id/imagebutton"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_centerVertical="true"
                 tools:imageUrl="@{item.img}"
+                android:tag="@{item.answer}"
                 android:layout_margin="2dp" />
 
 
 
-        <Button android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/button_id" />
+
 
     </android.support.v7.widget.CardView>
 

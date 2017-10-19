@@ -37,20 +37,12 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemViewHolder> {
     public void onBindViewHolder(ItemViewHolder holder, int position) {
 
         holder.bind(Items.get(position));
-        holder.button.setOnClickListener(new View.OnClickListener() {
+        holder.imageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(c, "hai", Toast.LENGTH_SHORT).show();
-                Item usr1 = new Item(true, "file:///android_asset/plant.png");
-                Item usr2 = new Item(false, "file:///android_asset/apple.png");
-                Item usr3 = new Item(false, "file:///android_asset/watermelon.png");
-                Item usr4 = new Item(false, "file:///android_asset/grape.png");
-
-                Items.clear();
-                Items.add(usr1);
-                Items.add(usr2);
-                Items.add(usr3);
-                Items.add(usr4);
+                view.getTag();
+                Toast.makeText(c, view.getTag().toString(), Toast.LENGTH_SHORT).show();
+               
                 ItemAdapter.this.notifyDataSetChanged();
             }
         });
