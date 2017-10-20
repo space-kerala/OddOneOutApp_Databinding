@@ -5,6 +5,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Toast;
 
 import java.util.List;
@@ -15,13 +17,18 @@ import java.util.List;
 
 public class ItemAdapter extends RecyclerView.Adapter<ItemViewHolder> {
 
-    private final List<Item> Items;
+    private List<Item> items;
     private Context c;
+    private JsonHandler jsonHandler;
+    private Animation animation;
+    private boolean animatio = true;
 
 
-    public ItemAdapter(List<Item> Items,Context c) {
-        this.Items = Items;
+
+    public ItemAdapter(List<Item> items,Context c) {
+        this.items = items;
         this.c = c;
+        jsonHandler = new JsonHandler(c);
     }
 
     @Override
@@ -34,24 +41,54 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemViewHolder> {
 
 
     @Override
-    public void onBindViewHolder(ItemViewHolder holder, int position) {
+    public void onBindViewHolder( ItemViewHolder holder, int position) {
 
-        holder.bind(Items.get(position));
+
+
+      /*  Animation animation = AnimationUtils.loadAnimation(c, android.R.anim.fade_in);
+        holder.imageButton.startAnimation(animation);*/
+
+
+
+        holder.bind(items.get(position));
+
         holder.imageButton.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View view) {
-                view.getTag();
+
                 Toast.makeText(c, view.getTag().toString(), Toast.LENGTH_SHORT).show();
-               
+                if(((boolean)view.getTag())==true )
+                {
+                    animatio = true;
+
+                    items.clear();
+                    SceneTracker.setLevel(SceneTracker.getLevel()+1);
+                   items=jsonHandler.getSceneData(SceneTracker.getLevel()-1);
+                }
                 ItemAdapter.this.notifyDataSetChanged();
             }
         });
+
+        if (animatio) {
+
+            animation = AnimationUtils.loadAnimation(c, android.R.anim.slide_in_left);
+            holder.imageButton.startAnimation(animation);
+        } else {
+
+            animation = AnimationUtils.loadAnimation(c, android.R.anim.decelerate_interpolator);
+            holder.imageButton.startAnimation(animation);
+        }
+
+
+
+
 
     }
 
     @Override
     public int getItemCount() {
-        return Items.size();
+        return items.size();
     }
 }
 

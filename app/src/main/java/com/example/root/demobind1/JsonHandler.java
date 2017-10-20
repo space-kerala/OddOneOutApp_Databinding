@@ -19,7 +19,7 @@ import java.util.ArrayList;
  */
 
 public class JsonHandler extends DataBindingListActivity {
-    private  JSONArray scenes;
+    private  static JSONArray scenes;
     private  Context ctx;
     public JsonHandler(Context ctx) {
 this.ctx=ctx;

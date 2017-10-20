@@ -23,6 +23,7 @@ public class ItemViewHolder extends RecyclerView.ViewHolder{
         binding = DataBindingUtil.bind(layoutView);
         imageButton= (ImageButton)layoutView.findViewById(R.id.imagebutton);
 
+
     }
 
     public void bind(Item item) {

@@ -14,6 +14,7 @@ public class DataBindingListActivity extends AppCompatActivity  {
     private ItemAdapter adapter;
     private JsonHandler jsonHandler;
 
+
     private int coloumn;
 
     @Override
@@ -21,8 +22,9 @@ public class DataBindingListActivity extends AppCompatActivity  {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.binding_list_activity);
 
-
+        int level=1;
         coloumn = 2;
+
         recycler = (RecyclerView) findViewById(R.id.recycler);
         recycler.setLayoutManager(new StaggeredGridLayoutManager(coloumn, 1));
         //list.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
@@ -43,8 +45,8 @@ public class DataBindingListActivity extends AppCompatActivity  {
 
         jsonHandler.readJson();
 
-
-        adapter = new ItemAdapter(jsonHandler.getSceneData(0), this);
+        SceneTracker.setLevel(level);
+        adapter = new ItemAdapter(jsonHandler.getSceneData(level-1), this);
         recycler.setAdapter(adapter);
 
 
