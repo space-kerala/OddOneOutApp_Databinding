@@ -10,6 +10,8 @@
             type="com.example.root.demobind1.Item" />
     </data>
 
+
+
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="250dp"
@@ -30,7 +32,9 @@
 
 
 
-
     </android.support.v7.widget.CardView>
+
+
+
 
 </layout>

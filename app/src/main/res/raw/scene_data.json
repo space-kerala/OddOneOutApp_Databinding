@@ -38,7 +38,7 @@
 
 
     [
-      {"src":"file:///android_asset/banana.png","answer":false},
+      {"src":"file:///android_asset/grape.png","answer":false},
       {"src":"file:///android_asset/mango.png","answer":false},
       {"src":"file:///android_asset/watermelon.png","answer":false},
       {"src":"file:///android_asset/clock.png","answer":true}
