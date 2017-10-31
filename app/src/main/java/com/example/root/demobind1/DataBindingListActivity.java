@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 
@@ -33,7 +34,7 @@ public class DataBindingListActivity extends AppCompatActivity  {
         int level=1;
         coloumn = 2;
 
-      //  Log.d("Tag",imageButtonBack.toString());
+
 
         imageButtonBack= (ImageButton) findViewById(R.id.imagebuttonback);
         recycler = (RecyclerView) findViewById(R.id.recycler);
@@ -52,23 +53,27 @@ public class DataBindingListActivity extends AppCompatActivity  {
         rightVoice = MediaPlayer.create(this, R.raw.correct);
         wrongVoice = MediaPlayer.create(this, R.raw.wrong);
 
-       // imageButtonBack.setVisibility(View.INVISIBLE);
-
-
-
 
 
 
         imageButtonBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                adapter.prevScene();
+             if(SceneTracker.getLevel()>1 && SceneTracker.getLevel() <= SceneTracker.getTotalLevel()) {
+                 adapter.prevScene();
+             }
 
             }
         });
 
 
+
+     /*   if(SceneTracker.getBack()==false) {
+            imageButtonBack.setVisibility(View.GONE);
+
+        }
+        else {  imageButtonBack.setVisibility(View.VISIBLE);}*/
+  Log.d("Tag",Integer.toString(SceneTracker.getTotalLevel()));
 
     }
 

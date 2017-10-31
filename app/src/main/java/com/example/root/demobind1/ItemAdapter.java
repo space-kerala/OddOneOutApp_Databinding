@@ -22,9 +22,10 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemViewHolder> {
     private Context c;
     private JsonHandler jsonHandler;
     private Animation animation;
-    private boolean animatio = true;
+    private boolean anim = false;
     private ImageButton imageButtonB;
     private MediaPlayer rightVoice, wrongVoice;
+
 
 
 
@@ -54,27 +55,25 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemViewHolder> {
     public void onBindViewHolder( ItemViewHolder holder, int position) {
 
 
-
-       Animation animation = AnimationUtils.loadAnimation(c, android.R.anim.fade_out);
-        holder.imageButton.startAnimation(animation);
-
-
-
         holder.bind(items.get(position));
-
-
         holder.imageButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View view) {
 
+
+
                 //Toast.makeText(c, view.getTag().toString(), Toast.LENGTH_SHORT).show();
-                if(((boolean)view.getTag())==true )
+                if(((boolean)view.getTag()==true) && SceneTracker.getLevel()<= SceneTracker.getTotalLevel() )
                 {
+
+
                     rightVoice.start();
                     rightVoice.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
                         @Override
                         public void onCompletion(MediaPlayer mediaPlayer) {
+
+                            anim=true;
                             items.clear();
                             SceneTracker.setLevel(SceneTracker.getLevel()+1);
                             items=jsonHandler.getSceneData(SceneTracker.getLevel()-1);
@@ -86,12 +85,14 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemViewHolder> {
 
                 }
                 else {
+                    anim=false;
                     wrongVoice.start();
                 }
 
                /* if(SceneTracker.getLevel()>1){
                     imageButtonB.setVisibility(View.VISIBLE);
                 }*/
+
                 ItemAdapter.this.notifyDataSetChanged();
 
             }
@@ -99,6 +100,18 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemViewHolder> {
 
 
 
+        if (anim==false) {
+
+            Animation animation = AnimationUtils.loadAnimation(c, android.R.anim.slide_in_left);
+            holder.imageButton.startAnimation(animation);
+
+
+        }
+        else {
+            Animation animation = AnimationUtils.loadAnimation(c, android.R.anim.fade_out);
+            holder.imageButton.startAnimation(animation);
+
+        }
 
 
     }

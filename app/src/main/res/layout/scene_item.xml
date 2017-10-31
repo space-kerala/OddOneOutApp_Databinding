@@ -27,7 +27,9 @@
                 android:layout_centerVertical="true"
                 tools:imageUrl="@{item.img}"
                 android:tag="@{item.answer}"
-                android:layout_margin="2dp" />
+                android:layout_margin="2dp"
+                android:scaleType="fitCenter"
+                 />
 
 
 
