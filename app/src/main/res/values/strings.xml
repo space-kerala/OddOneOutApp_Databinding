@@ -1,3 +1,7 @@
 <resources>
-    <string name="app_name">OddOut</string>
+    <string name="app_name">OddOneOut</string>
+    <string name="empty">Press Start to play Game</string>
+    <string name="refresh">Start</string>
+    <string name="back">backbutton</string>
+    <string name="next">Next</string>
 </resources>

@@ -1,6 +1,7 @@
 package com.example.root.demobind1;
 
 import android.content.Context;
+import android.os.Environment;
 import android.util.Log;
 
 import org.json.JSONArray;
@@ -8,6 +9,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -18,18 +21,29 @@ import java.util.ArrayList;
  * Created by root on 17/10/17.
  */
 
-public class JsonHandler extends DataBindingListActivity {
+public class JsonHandler {
     private  static JSONArray scenes;
     private  Context ctx;
-    public JsonHandler(Context ctx) {
-this.ctx=ctx;
+    public JsonHandler() {
+
     }
 
 
     public void readJson() {
         try {
             //Load File
-            BufferedReader jsonReader = new BufferedReader(new InputStreamReader(ctx.getResources().openRawResource(R.raw.scene_data)));
+            //BufferedReader jsonReader = new BufferedReader(new InputStreamReader(ctx.getResources().openRawResource(R.raw.scene_data)));
+
+            File myFile = new File((Environment.getExternalStorageDirectory().getAbsolutePath()+ "/oddoneout/scene_data.json"));
+            System.out.println("file.exists() = " + myFile.exists());
+
+            FileInputStream fIn = new FileInputStream(myFile);
+            BufferedReader jsonReader = new BufferedReader(
+                    new InputStreamReader(fIn));
+
+
+
+
             StringBuilder builder = new StringBuilder();
             for (String line = null; (line = jsonReader.readLine()) != null; ) {
                 builder.append(line).append("\n");

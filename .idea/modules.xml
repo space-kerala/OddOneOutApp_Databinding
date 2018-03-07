@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Demobind12.iml" filepath="$PROJECT_DIR$/Demobind12.iml" />
+      <module fileurl="file://$PROJECT_DIR$/OddOneOutApp_Databinding.iml" filepath="$PROJECT_DIR$/OddOneOutApp_Databinding.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>
