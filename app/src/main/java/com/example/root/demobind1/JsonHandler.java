@@ -1,6 +1,7 @@
 package com.example.root.demobind1;
 
 import android.content.Context;
+import android.net.Uri;
 import android.util.Log;
 
 import org.json.JSONArray;
@@ -13,16 +14,19 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 
+import ai.elimu.analytics.eventtracker.EventTracker;
+
 
 /**
  * Created by root on 17/10/17.
  */
 
 public class JsonHandler extends DataBindingListActivity {
-    private  static JSONArray scenes;
-    private  Context ctx;
+    private static JSONArray scenes;
+    private Context ctx;
+
     public JsonHandler(Context ctx) {
-this.ctx=ctx;
+        this.ctx = ctx;
     }
 
 
@@ -33,21 +37,13 @@ this.ctx=ctx;
             StringBuilder builder = new StringBuilder();
             for (String line = null; (line = jsonReader.readLine()) != null; ) {
                 builder.append(line).append("\n");
-              }
+            }
 
 
             JSONObject root = new JSONObject(builder.toString());
             Log.d("TTag", root.toString());
-            //Toast.makeText(this,root.getString("name").toString(),Toast.LENGTH_SHORT).show();
-            //root.getJSONArray("scenes").getJSONObject(0).getString("src");
 
             scenes = root.getJSONArray("scenes");
-           /* JSONArray scene = scenes.getJSONArray(0);
-            JSONObject sceneItem = scene.getJSONObject(0);
-
-            Toast.makeText(this, sceneItem.getString("src").toString(), Toast.LENGTH_SHORT).show();*/
-
-
 
 
         } catch (FileNotFoundException e) {
@@ -59,21 +55,33 @@ this.ctx=ctx;
         }
 
 
-
     }
 
-    public ArrayList<Item> getSceneData(int index){
+    public ArrayList<Item> getSceneData(int index) {
         JSONObject sceneItem;
         ArrayList<Item> itemList = new ArrayList<>();
         try {
-            JSONArray  scene = scenes.getJSONArray(index);
-            SceneTracker.setTotalLevel(scene.length()+1);
+            JSONArray scene = scenes.getJSONArray(index);
+            SceneTracker.setTotalLevel(scene.length() + 1);
 
             for (int i = 0; i < scene.length(); i++) {
 
-               sceneItem = scene.getJSONObject(i) ;
-                Item item = new Item(sceneItem.getBoolean("answer"),sceneItem.getString("src"));
+                sceneItem = scene.getJSONObject(i);
+                Item item = new Item(sceneItem.getBoolean("answer"), sceneItem.getString("src"));
+
+
+                String idStr = sceneItem.getString("src").substring(sceneItem.getString("src").lastIndexOf('/') + 1);
+                String str = idStr.replaceAll("\\..*", "");
+                //Log.d("TName",str);
+
+                if (sceneItem.getBoolean("answer")) {
+                    EventTracker.reportLetterLearningEvent(ctx, str);
+                    Log.d("TName", str);
+                }
+
                 itemList.add(item);
+
+
             }
 
 
@@ -85,3 +93,5 @@ this.ctx=ctx;
 
 
 }
+
+

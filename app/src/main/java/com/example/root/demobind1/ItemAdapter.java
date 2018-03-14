@@ -1,6 +1,7 @@
 package com.example.root.demobind1;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.media.MediaPlayer;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -12,6 +13,8 @@ import android.widget.ImageButton;
 
 import java.util.List;
 
+import ai.elimu.analytics.eventtracker.EventTracker;
+
 /**
  * Created by root on 9/10/17.
  */
@@ -21,16 +24,14 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemViewHolder> {
     private List<Item> items;
     private Context c;
     private JsonHandler jsonHandler;
+    private int count = 0;
     private Animation animation;
     private boolean anim = false;
     private ImageButton imageButtonB;
     private MediaPlayer rightVoice, wrongVoice;
 
 
-
-
-
-    public ItemAdapter(List<Item> items,Context c) {
+    public ItemAdapter(List<Item> items, Context c) {
         this.items = items;
         this.c = c;
         jsonHandler = new JsonHandler(c);
@@ -39,14 +40,11 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemViewHolder> {
 
     @Override
     public ItemViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        //imageButtonB = (ImageButton)parent.findViewById(R.id.imagebuttonback);
         LayoutInflater inflater = LayoutInflater.from(c);
         View sceneItem = inflater.inflate(R.layout.scene_item, parent, false);
 
-        //Log.d("Tagid",imageButtonB.toString());
         rightVoice = MediaPlayer.create(c, R.raw.correct);
         wrongVoice = MediaPlayer.create(c, R.raw.wrong);
-
         return new ItemViewHolder(sceneItem);
     }
 
@@ -56,65 +54,80 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemViewHolder> {
 
 
         holder.bind(items.get(position));
-
         holder.imageButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
-            public void onClick(View view) {
+            public void onClick(final View view) {
+
+                if (((boolean) view.getTag()) && SceneTracker.getLevel() <= SceneTracker.getTotalLevel()) {
 
 
-                //Toast.makeText(c, view.getTag().toString(), Toast.LENGTH_SHORT).show();
-                if(((boolean)view.getTag()==true) && SceneTracker.getLevel()<= SceneTracker.getTotalLevel() )
-                {
+                    ((ImageButton) view).setBackgroundColor(Color.GREEN);
 
-                    ((ImageButton) view).setImageResource(R.drawable.tick1);
-                    rightVoice.start();
-                    rightVoice.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-                        @Override
-                        public void onCompletion(MediaPlayer mediaPlayer) {
-
-                            anim=true;
-                            items.clear();
-                            SceneTracker.setLevel(SceneTracker.getLevel()+1);
-                            items=jsonHandler.getSceneData(SceneTracker.getLevel()-1);
-                            ItemAdapter.this.notifyDataSetChanged();
-
-                        }
-                    });
+                    if (count < 1) {
+                        rightVoice.start();
+                        count++;
+                        rightVoice.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                            @Override
+                            public void onCompletion(MediaPlayer mediaPlayer) {
 
 
+                                //wrongVoice.reset();
 
-                }
-                else {
+                                DataBindingListActivity.nextButton.setVisibility(View.VISIBLE);
+                                DataBindingListActivity.nextButton.setBackgroundColor(Color.GREEN);
+                                DataBindingListActivity.nextButton.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
 
-                    ((ImageButton) view).setImageResource(R.drawable.cross1);
-                    anim=false;
+
+
+                                        anim = true;
+                                        items.clear();
+                                        SceneTracker.setLevel(SceneTracker.getLevel() + 1);
+                                        items = jsonHandler.getSceneData(SceneTracker.getLevel() - 1);
+                                        ItemAdapter.this.notifyDataSetChanged();
+                                        DataBindingListActivity.nextButton.setVisibility(View.GONE);
+                                        v.setBackgroundColor(Color.TRANSPARENT);
+                                        ((ImageButton) view).setBackgroundColor(Color.TRANSPARENT);
+                                        count = 0;
+
+
+
+                                    }
+                                });
+
+
+                            }
+
+                        });
+
+                    }
+
+
+
+                } else {
+
                     wrongVoice.start();
-                    //ItemAdapter.this.notifyDataSetChanged();
+                    view.setBackgroundColor(Color.RED);
+                    anim = false;
 
                 }
 
-
-
-               /* if(SceneTracker.getLevel()>1){
-                    imageButtonB.setVisibility(View.VISIBLE);
-                }*/
-
-              //  ItemAdapter.this.notifyDataSetChanged();
 
             }
         });
 
+        holder.imageButton.setBackgroundColor(Color.TRANSPARENT);
 
 
-        if (anim==false) {
+        if (!anim) {
 
             Animation animation = AnimationUtils.loadAnimation(c, android.R.anim.fade_in);
-           holder.imageButton.startAnimation(animation);
+            holder.imageButton.startAnimation(animation);
 
 
-        }
-        else {
+        } else {
             Animation animation = AnimationUtils.loadAnimation(c, android.R.anim.fade_out);
             holder.imageButton.startAnimation(animation);
 
@@ -123,11 +136,10 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemViewHolder> {
 
     }
 
-    public void prevScene()
-    {
+    public void prevScene() {
         items.clear();
-        SceneTracker.setLevel(SceneTracker.getLevel()-1);
-        items=jsonHandler.getSceneData(SceneTracker.getLevel()-1);
+        SceneTracker.setLevel(SceneTracker.getLevel() - 1);
+        items = jsonHandler.getSceneData(SceneTracker.getLevel() - 1);
         ItemAdapter.this.notifyDataSetChanged();
     }
 

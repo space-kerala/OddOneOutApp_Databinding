@@ -11,11 +11,43 @@
     tools:context=".DataBindingListActivity"
     android:background="@drawable/b3">
 
-    <android.support.v7.widget.RecyclerView
+    <com.example.root.demobind1.RecyclerViewEmptySupport
         android:id="@+id/recycler"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginBottom="100dp" />
+
+    <TextView
+        android:id="@+id/list_empty"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="10dp"
+        android:layout_marginStart="10dp"
+        android:text="@string/empty"
+        android:textSize="20sp" />
+
+    <Button
+        android:id="@+id/reload"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/list_empty"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="50dp"
+        android:layout_marginStart="50dp"
+        android:onClick="restartActivity"
+        android:text="@string/refresh"
+        tools:ignore="RelativeOverlap" />
+
+    <Button
+        android:id="@+id/next_button"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/imagebuttonback"
+        android:text="@string/next"
+        android:layout_alignRight="@+id/recycler" />
+
 
     <ImageButton
         android:id="@+id/imagebuttonback"

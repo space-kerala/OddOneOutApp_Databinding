@@ -2,14 +2,6 @@
 
   "scenes": [
 
-    [
-      {"src":"file:///android_asset/biriyani.png","answer":false},
-      {"src":"file:///android_asset/idiyappam.png","answer":false},
-      {"src":"file:///android_asset/poori.png","answer":false},
-      {"src":"file:///android_asset/tux.png","answer":true}
-    ]
-  ,
-
 
     [
       {"src":"file:///android_asset/plant.png","answer":true},
