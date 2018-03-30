@@ -15,7 +15,7 @@ import android.view.View;
 
 public class RecyclerViewEmptySupport extends RecyclerView {
 
-    private View emptyView,buttonView;
+    private View emptyView,buttonView,rightView,wrongView,rightTextView,wrongTextView,woodView;
 
     private AdapterDataObserver emptyObserver = new AdapterDataObserver() {
 
@@ -28,10 +28,12 @@ public class RecyclerViewEmptySupport extends RecyclerView {
 
                     emptyView.setVisibility(View.VISIBLE);
                     buttonView.setVisibility(View.VISIBLE);
+                    woodView.setVisibility(View.VISIBLE);
                     // setAdapter(adapter);
                     RecyclerViewEmptySupport.this.setVisibility(View.GONE);
                 }
                 else {
+                    woodView.setVisibility(View.GONE);
                     emptyView.setVisibility(View.GONE);
                     buttonView.setVisibility(View.GONE);
                     RecyclerViewEmptySupport.this.setVisibility(View.VISIBLE);
@@ -72,6 +74,34 @@ public class RecyclerViewEmptySupport extends RecyclerView {
     }
     public void setButtonView(View buttonView){
         this.buttonView = buttonView;
+    }
+
+
+    public  void setRight(View rightView){
+        this.rightView=rightView;
+
+
+    }
+    public  void setWrong(View wrongView){
+        this.wrongView=wrongView;
+
+
+    }
+
+    public  void setRightText(View rightTextView){
+        this.rightTextView=rightTextView;
+
+
+    }
+    public  void setWrongText(View wrongTextView){
+        this.wrongTextView=wrongTextView;
+
+
+    }
+    public  void setWood(View woodView){
+        this.woodView=woodView;
+
+
     }
 
 

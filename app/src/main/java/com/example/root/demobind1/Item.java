@@ -6,10 +6,10 @@ package com.example.root.demobind1;
 
 public class Item {
 
-    public boolean answer;
+    public String answer;
     public String img;
 
-    public Item(boolean answer, String img){
+    public Item(String answer, String img){
 
         this.answer = answer;
         this.img = img;

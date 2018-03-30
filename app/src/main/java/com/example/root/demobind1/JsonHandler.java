@@ -34,7 +34,7 @@ public class JsonHandler {
             //Load File
             //BufferedReader jsonReader = new BufferedReader(new InputStreamReader(ctx.getResources().openRawResource(R.raw.scene_data)));
 
-            File myFile = new File((Environment.getExternalStorageDirectory().getAbsolutePath()+ "/oddoneout/scene_data.json"));
+            File myFile = new File((Environment.getExternalStorageDirectory().getAbsolutePath()+ "/oddoneout/oddoneout_scene_data.json"));
             System.out.println("file.exists() = " + myFile.exists());
 
             FileInputStream fIn = new FileInputStream(myFile);
@@ -86,7 +86,16 @@ public class JsonHandler {
             for (int i = 0; i < scene.length(); i++) {
 
                sceneItem = scene.getJSONObject(i) ;
-                Item item = new Item(sceneItem.getBoolean("answer"),sceneItem.getString("src"));
+                Item item = new Item(sceneItem.getString("answer"),sceneItem.getString("src"));
+
+
+                String idStr = sceneItem.getString("src").substring(sceneItem.getString("src").lastIndexOf('/') + 1);
+                String str = idStr.replaceAll("\\..*", "");
+                if ((sceneItem.getBoolean("answer"))) {
+                    SceneTracker.setflag(str);
+                }
+
+
                 itemList.add(item);
             }
 

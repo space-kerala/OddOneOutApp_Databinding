@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Color;
 import android.media.MediaPlayer;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,7 +12,10 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageButton;
 
+import java.util.Collections;
 import java.util.List;
+
+
 
 /**
  * Created by root on 9/10/17.
@@ -36,6 +40,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemViewHolder> {
         this.items = items;
         this.c = c;
         jsonHandler = new JsonHandler();
+        Collections.shuffle(items);
 
     }
 
@@ -62,29 +67,44 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemViewHolder> {
         holder.imageButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
-            public void onClick(final View view) {
+            public void onClick( View view) {
 
                 //view.setBackgroundColor(Color.TRANSPARENT);
                 //Toast.makeText(c, view.getTag().toString(), Toast.LENGTH_SHORT).show();
-                if (((boolean) view.getTag() == true) && SceneTracker.getLevel() <= SceneTracker.getTotalLevel()) {
+
+                Log.d("getTag", String.valueOf(view.getTag()));
+                Log.d("getTag",String.valueOf(String.valueOf(view.getTag())=="true"));
+
+                Boolean a = Boolean.valueOf(String.valueOf(view.getTag()));
+
+                if( a==true){
 
 
-                    //((ImageButton) view).setImageResource(R.drawable.tick1);
                     ((ImageButton) view).setBackgroundColor(Color.GREEN);
+                   // EventTracker.reportLetterLearningEvent(c, SceneTracker.getflag());
+                    Log.d("TName", SceneTracker.getflag());
+                    SceneTracker.setCorrectedItem((SceneTracker.getCorrectedItem()+1));
+                    DataBindingListActivity.right.setText(String.valueOf(SceneTracker.getCorrectedItem()));
+                    //((ImageButton) view).setImageResource(R.drawable.tick1);
 
-                if(count<1) {
+
+                //if(count<1) {
                     rightVoice.start();
                     count++;
                     rightVoice.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
                         @Override
                         public void onCompletion(MediaPlayer mediaPlayer) {
 
-                            // rightVoice.stop();
-                            wrongVoice.stop();
 
-                            DataBindingListActivity.nextButton.setVisibility(View.VISIBLE);
+
+
+
+                            // rightVoice.stop();
+                            //wrongVoice.stop();
+
+                          DataBindingListActivity.nextButton.setVisibility(View.VISIBLE);
                             DataBindingListActivity.nextButton.setBackgroundColor(Color.GREEN);
-                            DataBindingListActivity.nextButton.setOnClickListener(new View.OnClickListener() {
+                           DataBindingListActivity.nextButton.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
 
@@ -92,10 +112,13 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemViewHolder> {
                                     items.clear();
                                     SceneTracker.setLevel(SceneTracker.getLevel() + 1);
                                     items = jsonHandler.getSceneData(SceneTracker.getLevel() - 1);
+                                    if(items.size()!=0){
+                                        Collections.shuffle(items);
+                                    }
                                     ItemAdapter.this.notifyDataSetChanged();
                                     DataBindingListActivity.nextButton.setVisibility(View.GONE);
                                     v.setBackgroundColor(Color.TRANSPARENT);
-                                    ((ImageButton) view).setBackgroundColor(Color.TRANSPARENT);
+                                  //  ((ImageButton) view).setBackgroundColor(Color.TRANSPARENT);
                                     count = 0;
 
 
@@ -106,12 +129,14 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemViewHolder> {
                         }
                     });
 
-                }
+            //    }
 
-                } else {
+                } else  {
 
                     // ((ImageButton) view).setImageResource(R.drawable.cross1);
                     view.setBackgroundColor(Color.RED);
+                    SceneTracker.setWrongItem((SceneTracker.getWrongItem()+1));
+                    DataBindingListActivity.wrong.setText(String.valueOf(SceneTracker.getWrongItem()));
                     anim = false;
                     wrongVoice.start();
                     //rightVoice.stop();
@@ -157,6 +182,9 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemViewHolder> {
         items.clear();
         SceneTracker.setLevel(SceneTracker.getLevel()-1);
         items=jsonHandler.getSceneData(SceneTracker.getLevel()-1);
+        if(items.size()!=0){
+            Collections.shuffle(items);
+        }
         ItemAdapter.this.notifyDataSetChanged();
         count= 0;
     }

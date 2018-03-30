@@ -17,6 +17,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -34,6 +35,7 @@ public class DataBindingListActivity extends AppCompatActivity  {
     private ItemAdapter adapter;
     private JsonHandler jsonHandler;
     private ImageButton imageButtonBack;
+    public static TextView right,wrong;
     private File f1;
 
     private MediaPlayer rightVoice, wrongVoice;
@@ -80,6 +82,8 @@ public class DataBindingListActivity extends AppCompatActivity  {
         nextButton = (Button)findViewById(R.id.next_button);
         nextButton.setVisibility(View.GONE);
         imageButtonBack= (ImageButton) findViewById(R.id.imagebuttonback);
+        right = (TextView) findViewById(R.id.rightNo_id);
+        wrong = (TextView) findViewById(R.id.wrongNo_id);
        /* recycler = (RecyclerView) findViewById(R.id.recycler);
         recycler.setLayoutManager(new StaggeredGridLayoutManager(coloumn, 1));
 */
@@ -88,12 +92,17 @@ public class DataBindingListActivity extends AppCompatActivity  {
         recyclerViewEmptySupport.setLayoutManager(new StaggeredGridLayoutManager(coloumn, 1));
         recyclerViewEmptySupport.setEmptyView(findViewById(R.id.list_empty));
         recyclerViewEmptySupport.setButtonView(findViewById(R.id.reload));
+        recyclerViewEmptySupport.setRight(findViewById(R.id.rightNo_id));
+        recyclerViewEmptySupport.setWrong(findViewById(R.id.wrongNo_id));
+        recyclerViewEmptySupport.setRightText(findViewById(R.id.right_id));
+        recyclerViewEmptySupport.setWrongText(findViewById(R.id.wrong_id));
+        recyclerViewEmptySupport.setWood(findViewById(R.id.wood_id));
 
 
         if((permission == PackageManager.PERMISSION_GRANTED)&&(permission1==PackageManager.PERMISSION_GRANTED)) {
 
             makeDir();
-            CopyAssets();
+           // CopyAssets();
             loadJson();
             /*jsonHandler.readJson();
 
@@ -167,6 +176,7 @@ public class DataBindingListActivity extends AppCompatActivity  {
     }
 
 
+/*
 
     private void CopyAssets() {
         AssetManager assetManager = getAssets();
@@ -207,6 +217,7 @@ public class DataBindingListActivity extends AppCompatActivity  {
             out.write(buffer, 0, read);
         }
     }
+*/
 
 
 
