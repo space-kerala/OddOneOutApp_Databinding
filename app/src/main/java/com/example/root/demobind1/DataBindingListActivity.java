@@ -97,6 +97,7 @@ public class DataBindingListActivity extends AppCompatActivity  {
         recyclerViewEmptySupport.setRightText(findViewById(R.id.right_id));
         recyclerViewEmptySupport.setWrongText(findViewById(R.id.wrong_id));
         recyclerViewEmptySupport.setWood(findViewById(R.id.wood_id));
+        recyclerViewEmptySupport.setButtonExitView(findViewById(R.id.exit_id));
 
 
         if((permission == PackageManager.PERMISSION_GRANTED)&&(permission1==PackageManager.PERMISSION_GRANTED)) {
@@ -175,6 +176,9 @@ public class DataBindingListActivity extends AppCompatActivity  {
         startActivity(intent);
     }
 
+    public void exitActivity(View view){
+        this.finishAffinity();
+    }
 
 /*
 

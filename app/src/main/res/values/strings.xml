@@ -2,6 +2,7 @@
     <string name="app_name">OddOneOut</string>
     <string name="empty">Press Start to play Game</string>
     <string name="refresh">Start</string>
+    <string name="exit">EXIT</string>
     <string name="back">backbutton</string>
     <string name="next">Next</string>
     <string name="right_text">Right  \u0020\u0020:</string>
