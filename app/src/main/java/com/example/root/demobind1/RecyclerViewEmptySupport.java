@@ -30,6 +30,7 @@ public class RecyclerViewEmptySupport extends RecyclerView {
                     buttonView.setVisibility(View.VISIBLE);
                     buttonExitView.setVisibility(View.VISIBLE);
                     woodView.setVisibility(View.VISIBLE);
+
                     // setAdapter(adapter);
                     RecyclerViewEmptySupport.this.setVisibility(View.GONE);
                 }
@@ -38,6 +39,7 @@ public class RecyclerViewEmptySupport extends RecyclerView {
                     emptyView.setVisibility(View.GONE);
                     buttonView.setVisibility(View.GONE);
                     buttonExitView.setVisibility(View.GONE);
+
                     RecyclerViewEmptySupport.this.setVisibility(View.VISIBLE);
                 }
             }
@@ -109,6 +111,8 @@ public class RecyclerViewEmptySupport extends RecyclerView {
 
 
     }
+
+
 
 
 

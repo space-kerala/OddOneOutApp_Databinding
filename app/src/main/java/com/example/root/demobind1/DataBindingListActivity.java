@@ -98,6 +98,7 @@ public class DataBindingListActivity extends AppCompatActivity  {
         recyclerViewEmptySupport.setWrongText(findViewById(R.id.wrong_id));
         recyclerViewEmptySupport.setWood(findViewById(R.id.wood_id));
         recyclerViewEmptySupport.setButtonExitView(findViewById(R.id.exit_id));
+       // recyclerViewEmptySupport.setHomeButtonView(findViewById(R.id.home_id));
 
 
         if((permission == PackageManager.PERMISSION_GRANTED)&&(permission1==PackageManager.PERMISSION_GRANTED)) {
@@ -180,6 +181,10 @@ public class DataBindingListActivity extends AppCompatActivity  {
         this.finishAffinity();
     }
 
+    public void homeButtonActivity(View view){
+
+    }
+
 /*
 
     private void CopyAssets() {
@@ -246,6 +251,11 @@ public class DataBindingListActivity extends AppCompatActivity  {
     @Override
     public void onResume(){
         super.onResume();
+    }
+
+    @Override
+    public void onBackPressed() {
+        this.finishAffinity();
     }
 
 
