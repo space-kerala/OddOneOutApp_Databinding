@@ -29,6 +29,23 @@
         android:text="@string/empty"
         android:textSize="20sp" />
 
+    <TextView
+        android:id="@+id/levelText_id"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:layout_centerHorizontal="true"
+        android:text="@string/level_text"
+        android:textSize="30sp" />
+
+    <TextView
+        android:id="@+id/levelNo_id"
+        android:layout_width="70dp"
+        android:layout_height="50dp"
+        android:layout_centerHorizontal="false"
+        android:layout_marginLeft="10dp"
+        android:layout_toRightOf="@+id/levelText_id"
+        android:textSize="30sp" />
+
     <Button
         android:id="@+id/reload"
         android:layout_width="wrap_content"

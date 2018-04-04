@@ -1,6 +1,7 @@
 package com.example.root.demobind1;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
@@ -65,14 +66,17 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemViewHolder> {
 
 
         holder.bind(items.get(position));
+        holder.imageButton.setAlpha(1f);
+
+        DataBindingListActivity.levelText.setText(String.valueOf(SceneTracker.getLevel()));
 
         holder.imageButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
-            public void onClick( View view) {
+            public void onClick(final View view) {
 
-                //view.setBackgroundColor(Color.TRANSPARENT);
-                //Toast.makeText(c, view.getTag().toString(), Toast.LENGTH_SHORT).show();
+
+
 
                 int color = Color.TRANSPARENT;
                 Drawable background = view.getBackground();
@@ -85,29 +89,63 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemViewHolder> {
 
                 Boolean a = Boolean.valueOf(String.valueOf(view.getTag()));
 
-                if( a==true){
+                if( a==true) {
 
 
-                 if(color!=Color.GREEN) {
+                    Log.d("Total level",String.valueOf(SceneTracker.getTotalLevel()));
+                    if (SceneTracker.getLevel() == SceneTracker.getTotalLevel()) {
+                        rightVoice.start();
+                        rightVoice.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                            @Override
+                            public void onCompletion(MediaPlayer mp) {
+                                Intent intent= new Intent(c.getApplicationContext(),LastActivity.class);
+                                c.startActivity(intent);
+                            }
+                        });
+
+                    }
+                    else {
 
 
-                     ((ImageButton) view).setBackgroundColor(Color.GREEN);
-                     // EventTracker.reportLetterLearningEvent(c, SceneTracker.getflag());
-                     Log.d("TName", SceneTracker.getflag());
-                     SceneTracker.setCorrectedItem((SceneTracker.getCorrectedItem() + 1));
-                     DataBindingListActivity.right.setText(String.valueOf(SceneTracker.getCorrectedItem()));
-                     //((ImageButton) view).setImageResource(R.drawable.tick1);
+                        if (color != Color.GREEN) {
 
 
-                     //if(count<1) {
-                     rightVoice.start();
-                     count++;
-                     rightVoice.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-                         @Override
-                         public void onCompletion(MediaPlayer mediaPlayer) {
+                        ((ImageButton) view).setBackgroundColor(Color.GREEN);
+                        // EventTracker.reportLetterLearningEvent(c, SceneTracker.getflag());
+                        Log.d("TName", SceneTracker.getflag());
+                        SceneTracker.setCorrectedItem((SceneTracker.getCorrectedItem() + 1));
+                        DataBindingListActivity.right.setText(String.valueOf(SceneTracker.getCorrectedItem()));
+                        //((ImageButton) view).setImageResource(R.drawable.tick1);
 
 
-                             DataBindingListActivity.nextButton.setVisibility(View.VISIBLE);
+                        //if(count<1) {
+                        rightVoice.start();
+                        count++;
+                        rightVoice.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                            @Override
+                            public void onCompletion(MediaPlayer mediaPlayer) {
+
+
+                                anim = true;
+                                items.clear();
+                                SceneTracker.setLevel(SceneTracker.getLevel() + 1);
+                                items = jsonHandler.getSceneData(SceneTracker.getLevel() - 1);
+                                if (items.size() != 0) {
+                                    Collections.shuffle(items);
+                                }
+                                ItemAdapter.this.notifyDataSetChanged();
+                                DataBindingListActivity.nextButton.setVisibility(View.GONE);
+                                view.setBackgroundColor(Color.TRANSPARENT);
+                                //  ((ImageButton) view).setBackgroundColor(Color.TRANSPARENT);
+                                count = 0;
+                                view.setAlpha(1);
+
+
+
+
+
+
+                      /*       DataBindingListActivity.nextButton.setVisibility(View.VISIBLE);
                              DataBindingListActivity.nextButton.setBackgroundColor(Color.GREEN);
                              DataBindingListActivity.nextButton.setOnClickListener(new View.OnClickListener() {
                                  @Override
@@ -128,14 +166,15 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemViewHolder> {
 
 
                                  }
-                             });
+                             });*/
 
 
-                         }
-                     });
+                            }
+                        });
 
-                     //    }
-                 }
+                        //    }
+                    }
+                }
 
                 } else  {
 
@@ -145,6 +184,8 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemViewHolder> {
                         color = ((ColorDrawable) background).getColor();*/
 
                     if(color!=Color.RED){
+
+                       view.setAlpha(0.5f);
                         SceneTracker.setWrongItem((SceneTracker.getWrongItem()+1));
                         DataBindingListActivity.wrong.setText(String.valueOf(SceneTracker.getWrongItem()));
                         wrongVoice.start();

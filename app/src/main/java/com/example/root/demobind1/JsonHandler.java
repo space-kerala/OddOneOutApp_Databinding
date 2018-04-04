@@ -81,7 +81,7 @@ public class JsonHandler {
         ArrayList<Item> itemList = new ArrayList<>();
         try {
             JSONArray  scene = scenes.getJSONArray(index);
-            SceneTracker.setTotalLevel(scene.length()+1);
+            SceneTracker.setTotalLevel(scene.length()-1);
 
             for (int i = 0; i < scene.length(); i++) {
 

@@ -35,7 +35,7 @@ public class DataBindingListActivity extends AppCompatActivity  {
     private ItemAdapter adapter;
     private JsonHandler jsonHandler;
     private ImageButton imageButtonBack;
-    public static TextView right,wrong;
+    public static TextView right,wrong,levelText;
     private File f1;
 
     private MediaPlayer rightVoice, wrongVoice;
@@ -84,6 +84,7 @@ public class DataBindingListActivity extends AppCompatActivity  {
         imageButtonBack= (ImageButton) findViewById(R.id.imagebuttonback);
         right = (TextView) findViewById(R.id.rightNo_id);
         wrong = (TextView) findViewById(R.id.wrongNo_id);
+        levelText = (TextView) findViewById(R.id.levelNo_id) ;
        /* recycler = (RecyclerView) findViewById(R.id.recycler);
         recycler.setLayoutManager(new StaggeredGridLayoutManager(coloumn, 1));
 */
@@ -98,7 +99,8 @@ public class DataBindingListActivity extends AppCompatActivity  {
         recyclerViewEmptySupport.setWrongText(findViewById(R.id.wrong_id));
         recyclerViewEmptySupport.setWood(findViewById(R.id.wood_id));
         recyclerViewEmptySupport.setButtonExitView(findViewById(R.id.exit_id));
-       // recyclerViewEmptySupport.setHomeButtonView(findViewById(R.id.home_id));
+        recyclerViewEmptySupport.setLevelText(findViewById(R.id.levelText_id));
+        recyclerViewEmptySupport.setLevel(findViewById(R.id.levelNo_id));
 
 
         if((permission == PackageManager.PERMISSION_GRANTED)&&(permission1==PackageManager.PERMISSION_GRANTED)) {
@@ -173,6 +175,8 @@ public class DataBindingListActivity extends AppCompatActivity  {
     }
     public void restartActivity(View view)
     {
+        SceneTracker.setCorrectedItem(0);
+        SceneTracker.setWrongItem(0);
         Intent intent= new Intent(this, DataBindingListActivity.class);
         startActivity(intent);
     }
