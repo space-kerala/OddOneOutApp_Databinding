@@ -69,6 +69,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemViewHolder> {
         holder.imageButton.setAlpha(1f);
 
         DataBindingListActivity.levelText.setText(String.valueOf(SceneTracker.getLevel()));
+       holder.imageButton.setSoundEffectsEnabled(false);
 
         holder.imageButton.setOnClickListener(new View.OnClickListener() {
 
@@ -92,16 +93,22 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemViewHolder> {
                 if( a==true) {
 
 
-                    Log.d("Total level",String.valueOf(SceneTracker.getTotalLevel()));
                     if (SceneTracker.getLevel() == SceneTracker.getTotalLevel()) {
-                        rightVoice.start();
-                        rightVoice.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-                            @Override
-                            public void onCompletion(MediaPlayer mp) {
-                                Intent intent= new Intent(c.getApplicationContext(),LastActivity.class);
-                                c.startActivity(intent);
-                            }
-                        });
+
+                        if (color != Color.GREEN) {
+
+
+                            ((ImageButton) view).setBackgroundColor(Color.GREEN);
+
+                            rightVoice.start();
+                            rightVoice.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                                @Override
+                                public void onCompletion(MediaPlayer mp) {
+                                    Intent intent = new Intent(c.getApplicationContext(), LastActivity.class);
+                                    c.startActivity(intent);
+                                }
+                            });
+                        }
 
                     }
                     else {

@@ -26,7 +26,7 @@ public class LastActivity extends AppCompatActivity {
     {
         SceneTracker.setCorrectedItem(0);
         SceneTracker.setWrongItem(0);
-        Intent intent= new Intent(this, DataBindingListActivity.class);
+        Intent intent= new Intent(this, StartActivity.class);
         startActivity(intent);
     }
 

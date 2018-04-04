@@ -185,7 +185,9 @@ public class DataBindingListActivity extends AppCompatActivity  {
         this.finishAffinity();
     }
 
-    public void homeButtonActivity(View view){
+    public void goHome(View view){
+        Intent intent= new Intent(this, StartActivity.class);
+        startActivity(intent);
 
     }
 
