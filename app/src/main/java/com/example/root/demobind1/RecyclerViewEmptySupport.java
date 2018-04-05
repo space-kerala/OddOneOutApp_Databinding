@@ -30,8 +30,8 @@ public class RecyclerViewEmptySupport extends RecyclerView {
                     buttonView.setVisibility(View.VISIBLE);
                     buttonExitView.setVisibility(View.VISIBLE);
                     woodView.setVisibility(View.VISIBLE);
-                    levelView.setVisibility(View.GONE);
-                    levelTextView.setVisibility(View.GONE);
+                    levelView.setVisibility(View.INVISIBLE);
+                    levelTextView.setVisibility(View.INVISIBLE);
 
                     // setAdapter(adapter);
                     RecyclerViewEmptySupport.this.setVisibility(View.GONE);

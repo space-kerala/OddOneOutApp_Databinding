@@ -9,37 +9,35 @@
 
     <TextView
         android:id="@+id/textView"
-        android:layout_width="150dp"
+        android:layout_width="215dp"
         android:layout_height="50dp"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
         android:text="@string/gameover"
-        android:textSize="30sp"
+        android:textSize="40sp"
         android:textStyle="bold"
         tools:layout_editor_absoluteX="30dp"
         tools:layout_editor_absoluteY="46dp" />
 
     <Button
         android:id="@+id/reload"
-        android:layout_width="250dp"
-        android:layout_height="60dp"
-        android:layout_below="@+id/accuracy_id"
+        android:layout_width="350dp"
+        android:layout_height="100dp"
         android:layout_centerHorizontal="true"
-        android:layout_centerVertical="false"
-        android:layout_marginTop="20dp"
+        android:layout_centerVertical="true"
         android:background="@drawable/log"
         android:fontFamily="casual"
         android:onClick="restartActivity"
         android:text="@string/refresh"
         android:textColor="@android:color/white"
-        android:textSize="30sp"
+        android:textSize="36sp"
         android:textStyle="bold"
         tools:ignore="RelativeOverlap" />
 
     <Button
         android:id="@+id/exit_id"
-        android:layout_width="250dp"
-        android:layout_height="60dp"
+        android:layout_width="350dp"
+        android:layout_height="100dp"
         android:layout_below="@+id/reload"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"
@@ -48,38 +46,38 @@
         android:onClick="exitActivity"
         android:text="@string/exit"
         android:textColor="@android:color/white"
-        android:textSize="30sp"
+        android:textSize="36sp"
         android:textStyle="bold" />
 
 
     <TextView
         android:id="@+id/right_id"
-        android:layout_width="85dp"
+        android:layout_width="110dp"
         android:layout_height="50dp"
         android:layout_below="@+id/textView"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="30dp"
         android:text="@string/right_text"
-        android:textSize="24sp" />
+        android:textSize="30sp" />
 
     <TextView
         android:id="@+id/wrong_id"
-        android:layout_width="85dp"
+        android:layout_width="110dp"
         android:layout_height="50dp"
 
         android:layout_below="@+id/right_id"
         android:layout_centerHorizontal="true"
         android:text="@string/wrong_text"
-        android:textSize="24sp" />
+        android:textSize="30sp" />
 
     <TextView
         android:id="@+id/rightNo_id"
         android:layout_width="80dp"
         android:layout_height="50dp"
         android:layout_below="@+id/textView"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="30dp"
         android:layout_toRightOf="@+id/right_id"
-        android:textSize="24sp" />
+        android:textSize="30sp" />
 
     <TextView
         android:id="@+id/wrongNo_id"
@@ -87,7 +85,7 @@
         android:layout_height="50dp"
         android:layout_below="@+id/rightNo_id"
         android:layout_toRightOf="@+id/wrong_id"
-        android:textSize="24sp" />
+        android:textSize="30sp" />
 
     <TextView
         android:id="@+id/accuracy_id"
@@ -95,6 +93,7 @@
         android:layout_height="50dp"
         android:layout_below="@+id/wrong_id"
         android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
         android:text="@string/accuracy_text"
         android:textSize="30sp" />
 
@@ -103,6 +102,8 @@
         android:layout_width="80dp"
         android:layout_height="50dp"
         android:layout_below="@+id/wrongNo_id"
-        android:layout_toRightOf="@+id/accuracy_id"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_toRightOf="@+id/wrong_id"
         android:textSize="30sp" />
 </RelativeLayout>

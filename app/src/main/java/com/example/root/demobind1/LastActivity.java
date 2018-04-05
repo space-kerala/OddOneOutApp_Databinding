@@ -8,7 +8,7 @@ import android.widget.TextView;
 
 public class LastActivity extends AppCompatActivity {
 
-    public static TextView right,wrong,levelText;
+    public static TextView right,wrong,levelText,accuracy;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,13 +20,20 @@ public class LastActivity extends AppCompatActivity {
 
         wrong.setText(String.valueOf(SceneTracker.getWrongItem()));
         right.setText(String.valueOf(SceneTracker.getCorrectedItem()));
+        accuracy = (TextView)findViewById(R.id.accuracyNo_id) ;
+
+        int a = SceneTracker.getWrongItem();
+        int b = SceneTracker.getCorrectedItem();
+        int c = a+b;
+        int x = (int) (((double) b / (double) c) * 100);
+        accuracy.setText(String.valueOf(x));
     }
 
     public void restartActivity(View view)
     {
         SceneTracker.setCorrectedItem(0);
         SceneTracker.setWrongItem(0);
-        Intent intent= new Intent(this, StartActivity.class);
+        Intent intent= new Intent(this, DataBindingListActivity.class);
         startActivity(intent);
     }
 

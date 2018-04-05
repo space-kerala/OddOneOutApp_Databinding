@@ -118,7 +118,7 @@ public class DataBindingListActivity extends AppCompatActivity  {
             wrongVoice = MediaPlayer.create(this, R.raw.wrong);
 
 
-            imageButtonBack.setOnClickListener(new View.OnClickListener() {
+           /* imageButtonBack.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     if (SceneTracker.getLevel() > 1 && SceneTracker.getLevel() <= SceneTracker.getTotalLevel()) {
@@ -127,7 +127,7 @@ public class DataBindingListActivity extends AppCompatActivity  {
 
                 }
             });
-
+*/
 
 
      /*   if(SceneTracker.getBack()==false) {

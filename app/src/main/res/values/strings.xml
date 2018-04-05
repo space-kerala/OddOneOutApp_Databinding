@@ -3,10 +3,12 @@
     <string name="empty">Press Start to play Game</string>
     <string name="refresh">restart</string>
     <string name="exit">EXIT</string>
+    <string name="play">PLAY</string>
     <string name="back">backbutton</string>
     <string name="next">Next</string>
     <string name="right_text">Right  \u0020\u0020:</string>
     <string name="wrong_text">Wrong :</string>
     <string name="level_text">Level \u0020:</string>
     <string name="gameover">Game Over</string>
+    <string name="accuracy_text">Accuracy :</string>
 </resources>

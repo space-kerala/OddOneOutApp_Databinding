@@ -117,8 +117,9 @@
         android:layout_height="50dp"
         android:layout_above="@+id/wrong_id"
         android:layout_marginLeft="85dp"
-        android:textSize="24sp"
-        android:layout_marginStart="85dp" />
+        android:layout_marginStart="85dp"
+        android:text="0"
+        android:textSize="24sp" />
 
     <TextView
         android:id="@+id/wrongNo_id"
@@ -126,6 +127,7 @@
         android:layout_height="50dp"
         android:layout_above="@+id/next_button"
         android:layout_marginLeft="85dp"
+        android:text="0"
         android:textSize="24sp" />
 
     <ImageView
@@ -138,12 +140,6 @@
         android:background="@android:color/transparent" />
 
 
-
-
-
-
-
-
     <ImageButton
         android:id="@+id/imagebuttonback"
         android:layout_width="100dp"
@@ -154,8 +150,7 @@
         android:layout_marginLeft="11dp"
         android:layout_marginStart="11dp"
         android:background="@android:color/transparent"
-        android:scaleType="centerCrop"
-        app:srcCompat="@drawable/back" />
+        android:scaleType="centerCrop" />
 
 
 </RelativeLayout>

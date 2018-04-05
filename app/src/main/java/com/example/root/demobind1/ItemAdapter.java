@@ -99,6 +99,8 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemViewHolder> {
 
 
                             ((ImageButton) view).setBackgroundColor(Color.GREEN);
+                            SceneTracker.setCorrectedItem((SceneTracker.getCorrectedItem() + 1));
+                            DataBindingListActivity.right.setText(String.valueOf(SceneTracker.getCorrectedItem()));
 
                             rightVoice.start();
                             rightVoice.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
