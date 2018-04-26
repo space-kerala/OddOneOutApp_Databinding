@@ -12,16 +12,21 @@
         android:icon="@drawable/icon2"
         android:label="@string/app_name"
         android:supportsRtl="true"
+
         android:theme="@style/AppTheme">
-        <activity android:name=".DataBindingListActivity">
+        <activity android:name=".DataBindingListActivity"
+            android:screenOrientation="portrait">
+
            <!-- <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>-->
         </activity>
-        <activity android:name=".LastActivity" />
-        <activity android:name=".StartActivity">
+        <activity android:name=".LastActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".StartActivity"
+            android:screenOrientation="portrait">
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
